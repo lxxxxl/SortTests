@@ -31,6 +31,7 @@ public:
     void endSorting();
 
     void bubbleSort();
+    void combSort();
 
 
 

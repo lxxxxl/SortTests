@@ -44,6 +44,9 @@ void FieldScene::startSorting()
         case eaBubbleSort:
             bubbleSort();
             break;
+        case eaCombSort:
+            combSort();
+            break;
         default:
             break;
     }
@@ -103,5 +106,22 @@ void FieldScene::bubbleSort()
                 sorted = false;
             }
         }
+    }
+}
+
+void FieldScene::combSort()
+{
+    double factor = 1.2473309;
+    int len = FIELD_WIDTH;
+    int step = len / 2;
+    while (step >= 1){
+        for (int i = 0; i + step < len; i++){
+            if (_sprites[i]->getTag() > _sprites[i+step]->getTag()){
+                setNewCoords(_sprites[i], i+step, _sprites[i]->getTag());
+                setNewCoords(_sprites[i+step], i, _sprites[i+step]->getTag());
+                std::swap(_sprites[i], _sprites[i+step]);
+            }
+        }
+        step /= factor;
     }
 }
