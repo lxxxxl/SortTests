@@ -35,14 +35,20 @@ bool FieldScene::init()
         _sprites[i] = sprite;
     }
 
-    //http://indivour.blogspot.com/2016/02/cocos2d-x-v3x-calling-functions-after.html
-    float delay = 3.0f;
-    this->scheduleOnce(CC_SCHEDULE_SELECTOR(FieldScene::startSorting), delay);
+    startSorting();
+
+    // delay after sorting end;
+    TargetedAction *actionEndDelay = TargetedAction::create(this, DelayTime::create(3.0f));
+    _actions.pushBack(actionEndDelay);
+    // go back to main menu
+    TargetedAction *actionBack = TargetedAction::create(this,  CallFunc::create(CC_CALLBACK_0(FieldScene::endSorting, this)));
+    _actions.pushBack(actionBack);
+    runAction(Sequence::create(_actions));
 
     return true;
 }
 
-void FieldScene::startSorting(float)
+void FieldScene::startSorting()
 {
     switch (algo){
         case eaBubbleSort:
@@ -51,12 +57,9 @@ void FieldScene::startSorting(float)
         default:
             break;
     }
-
-    float delay = 3.0f;
-    this->scheduleOnce(CC_SCHEDULE_SELECTOR(FieldScene::endSorting), delay);
 }
 
-void FieldScene::endSorting(float)
+void FieldScene::endSorting()
 {
     auto scene = MenuScene::create();
     Director::getInstance()->replaceScene(scene);
@@ -74,9 +77,8 @@ int FieldScene::getAlgo() const
 
 void FieldScene::setNewCoords(Sprite *sprite, int x, int y)
 {
-    auto moveTo = MoveTo::create(0.4f, Vec2(x*SPRITE_SIZE, y*SPRITE_SIZE));
-    sprite->setPosition(Vec2(x*SPRITE_SIZE, y*SPRITE_SIZE));
-    //sprite->runAction(moveTo);
+    TargetedAction *action = TargetedAction::create(sprite, MoveTo::create(0.05f, Vec2(x*SPRITE_SIZE, y*SPRITE_SIZE)));
+    _actions.pushBack(action);
 }
 
 Sprite *FieldScene::spriteFromTileset(int gid)

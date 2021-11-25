@@ -26,13 +26,9 @@ public:
     // x and y are in tileno, NOT screen coords
     void setNewCoords(Sprite *sprite, int x, int y);
     // callback for start sorting procedure
-    void startSorting(float);
+    void startSorting();
     // callback for end sorting procedure
-    void endSorting(float);
-    // set sorting algo
-    //void setAlgo(FieldScene::eAlgo a);
-    // get sorting algo
-    //void getAlgo();
+    void endSorting();
 
     void bubbleSort();
 
@@ -47,6 +43,7 @@ private:
     TMXLayer *_background;
     TMXLayer *_objects;
     Sprite *_sprites[FIELD_WIDTH];
+    Vector< FiniteTimeAction * > _actions;
 };
 
 #endif // __FIELD_SCENE_H__
