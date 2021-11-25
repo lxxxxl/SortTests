@@ -38,5 +38,6 @@ void MenuScene::displayFieldScene(int algo)
 {
     auto scene = FieldScene::create();
     scene->setAlgo(algo);
+    scene->startSorting();
     Director::getInstance()->replaceScene(scene);
 }

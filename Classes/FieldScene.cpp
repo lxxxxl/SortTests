@@ -35,16 +35,6 @@ bool FieldScene::init()
         _sprites[i] = sprite;
     }
 
-    startSorting();
-
-    // delay after sorting end;
-    TargetedAction *actionEndDelay = TargetedAction::create(this, DelayTime::create(3.0f));
-    _actions.pushBack(actionEndDelay);
-    // go back to main menu
-    TargetedAction *actionBack = TargetedAction::create(this,  CallFunc::create(CC_CALLBACK_0(FieldScene::endSorting, this)));
-    _actions.pushBack(actionBack);
-    runAction(Sequence::create(_actions));
-
     return true;
 }
 
@@ -57,6 +47,14 @@ void FieldScene::startSorting()
         default:
             break;
     }
+
+    // delay after sorting end;
+    TargetedAction *actionEndDelay = TargetedAction::create(this, DelayTime::create(3.0f));
+    _actions.pushBack(actionEndDelay);
+    // go back to main menu
+    TargetedAction *actionBack = TargetedAction::create(this,  CallFunc::create(CC_CALLBACK_0(FieldScene::endSorting, this)));
+    _actions.pushBack(actionBack);
+    runAction(Sequence::create(_actions));
 }
 
 void FieldScene::endSorting()
