@@ -27,10 +27,13 @@ bool MenuScene::init()
     auto item3 = MenuItemFont::create("Shaker Sort", [&](Ref* sender){
         displayFieldScene(FieldScene::eaShakerSort);
     });
+    auto item4 = MenuItemFont::create("Radix Sort", [&](Ref* sender){
+        displayFieldScene(FieldScene::eaRadixSort);
+    });
 
     //////////////////////////////
     // 3. create menu
-    auto menu = Menu::create(item1, item2, item3, nullptr);
+    auto menu = Menu::create(item1, item2, item3, item4, nullptr);
     menu->alignItemsVertically();
     this->addChild(menu, 1);
 

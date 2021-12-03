@@ -16,7 +16,8 @@ public:
     enum eAlgo {
         eaBubbleSort,
         eaCombSort,
-        eaShakerSort
+        eaShakerSort,
+        eaRadixSort
     };
 
     static Scene* createScene();
@@ -34,7 +35,7 @@ public:
     void bubbleSort();
     void combSort();
     void shakerSort();
-
+    void radixSort();
 
 
     CC_PROPERTY(int, algo, Algo);
