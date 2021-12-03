@@ -35,24 +35,21 @@ bool FieldScene::init()
         _sprites[i] = sprite;
     }
 
+    //4. init sorting algos
+    _algos.push_back(&FieldScene::bubbleSort);
+    _algos.push_back(&FieldScene::combSort);
+    _algos.push_back(&FieldScene::shakerSort);
+
     return true;
 }
 
 void FieldScene::startSorting()
 {
-    switch (algo){
-        case eaBubbleSort:
-            bubbleSort();
-            break;
-        case eaCombSort:
-            combSort();
-            break;
-        case eaShakerSort:
-            combSort();
-            break;
-        default:
-            break;
-    }
+    if (algo > _algos.size())
+        return;
+
+    SortFunction s = _algos[algo];
+    (this->*s)();
 
     // delay after sorting end;
     TargetedAction *actionEndDelay = TargetedAction::create(this, DelayTime::create(3.0f));

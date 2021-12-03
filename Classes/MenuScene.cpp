@@ -19,13 +19,13 @@ bool MenuScene::init()
     /////////////////////////////
     // 2. create menu items
     auto item1 = MenuItemFont::create("Bubble Sort", [&](Ref* sender){
-        displayFieldScene(0);
+        displayFieldScene(FieldScene::eaBubbleSort);
     });
     auto item2 = MenuItemFont::create("Comb Sort", [&](Ref* sender){
-        displayFieldScene(1);
+        displayFieldScene(FieldScene::eaCombSort);
     });
     auto item3 = MenuItemFont::create("Shaker Sort", [&](Ref* sender){
-        displayFieldScene(2);
+        displayFieldScene(FieldScene::eaShakerSort);
     });
 
     //////////////////////////////

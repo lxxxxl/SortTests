@@ -47,6 +47,9 @@ private:
     TMXLayer *_objects;
     Sprite *_sprites[FIELD_WIDTH];
     Vector< FiniteTimeAction * > _actions;
+
+    typedef void (FieldScene::*SortFunction)();
+    std::vector<SortFunction> _algos;
 };
 
 #endif // __FIELD_SCENE_H__
