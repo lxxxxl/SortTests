@@ -18,7 +18,8 @@ public:
         eaCombSort,
         eaShakerSort,
         eaRadixSort,
-        eaCountingSort
+        eaCountingSort,
+        eaGnomeSort
     };
 
     static Scene* createScene();
@@ -38,6 +39,7 @@ public:
     void shakerSort();
     void radixSort();
     void countingSort();
+    void gnomeSort();
 
 
     CC_PROPERTY(int, algo, Algo);

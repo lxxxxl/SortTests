@@ -41,6 +41,7 @@ bool FieldScene::init()
     _algos.push_back(&FieldScene::shakerSort);
     _algos.push_back(&FieldScene::radixSort);
     _algos.push_back(&FieldScene::countingSort);
+    _algos.push_back(&FieldScene::gnomeSort);
 
     return true;
 }
@@ -213,6 +214,22 @@ void FieldScene::countingSort()
             setNewCoords(_sprites[pos], pos, _sprites[pos]->getTag());
             pos++;
             j++;
+        }
+    }
+}
+
+void FieldScene::gnomeSort()
+{
+    int pos = 0;
+    while (pos < FIELD_WIDTH){
+        if ((pos == 0) ||
+        _sprites[pos]->getTag() >= _sprites[pos-1]->getTag())
+            pos++;
+        else{
+            setNewCoords(_sprites[pos], pos-1, _sprites[pos]->getTag());
+            setNewCoords(_sprites[pos-1], pos, _sprites[pos-1]->getTag());
+            std::swap(_sprites[pos], _sprites[pos-1]);
+            pos--;
         }
     }
 }
