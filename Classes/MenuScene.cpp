@@ -36,10 +36,13 @@ bool MenuScene::init()
     auto item6 = MenuItemFont::create("Gnome Sort", [&](Ref* sender){
         displayFieldScene(FieldScene::eaGnomeSort);
     });
+    auto item7 = MenuItemFont::create("Pancake Sort", [&](Ref* sender){
+        displayFieldScene(FieldScene::eaPancakeSort);
+    });
 
     //////////////////////////////
     // 3. create menu
-    auto menu = Menu::create(item1, item2, item3, item4, item5, item6, nullptr);
+    auto menu = Menu::create(item1, item2, item3, item4, item5, item6, item7, nullptr);
     menu->alignItemsVertically();
     this->addChild(menu, 1);
 

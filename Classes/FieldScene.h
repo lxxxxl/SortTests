@@ -19,7 +19,8 @@ public:
         eaShakerSort,
         eaRadixSort,
         eaCountingSort,
-        eaGnomeSort
+        eaGnomeSort,
+        eaPancakeSort
     };
 
     static Scene* createScene();
@@ -33,6 +34,8 @@ public:
     void startSorting();
     // callback for end sorting procedure
     void endSorting();
+    // helper function for pancake sort
+    void flip(int startIndex, int endIndex);
 
     void bubbleSort();
     void combSort();
@@ -40,6 +43,7 @@ public:
     void radixSort();
     void countingSort();
     void gnomeSort();
+    void pancakeSort();
 
 
     CC_PROPERTY(int, algo, Algo);

@@ -42,6 +42,7 @@ bool FieldScene::init()
     _algos.push_back(&FieldScene::radixSort);
     _algos.push_back(&FieldScene::countingSort);
     _algos.push_back(&FieldScene::gnomeSort);
+    _algos.push_back(&FieldScene::pancakeSort);
 
     return true;
 }
@@ -230,6 +231,33 @@ void FieldScene::gnomeSort()
             setNewCoords(_sprites[pos-1], pos, _sprites[pos-1]->getTag());
             std::swap(_sprites[pos], _sprites[pos-1]);
             pos--;
+        }
+    }
+}
+
+void FieldScene::flip(int startIndex, int endIndex)
+{
+    while (startIndex <= endIndex){
+        setNewCoords(_sprites[startIndex], endIndex, _sprites[startIndex]->getTag());
+        setNewCoords(_sprites[endIndex], startIndex, _sprites[endIndex]->getTag());
+        std::swap(_sprites[startIndex], _sprites[endIndex]);
+        startIndex++;
+        endIndex--;
+    }
+}
+
+void FieldScene::pancakeSort()
+{
+    for (int i = FIELD_WIDTH; i > 1;  --i)
+    {
+        int max_index = 0;
+        for (int j = 0; j < i; j++)
+            if (_sprites[j]->getTag() > _sprites[max_index]->getTag())
+                max_index = j;
+
+        if (max_index != i - 1) {
+            flip(0, max_index);
+            flip(0, i - 1);
         }
     }
 }
