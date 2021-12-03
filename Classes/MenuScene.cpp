@@ -24,10 +24,13 @@ bool MenuScene::init()
     auto item2 = MenuItemFont::create("Comb Sort", [&](Ref* sender){
         displayFieldScene(1);
     });
+    auto item3 = MenuItemFont::create("Shaker Sort", [&](Ref* sender){
+        displayFieldScene(2);
+    });
 
     //////////////////////////////
     // 3. create menu
-    auto menu = Menu::create(item1, item2, nullptr);
+    auto menu = Menu::create(item1, item2, item3, nullptr);
     menu->alignItemsVertically();
     this->addChild(menu, 1);
 

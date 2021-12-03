@@ -9,21 +9,21 @@ Scene* FieldScene::createScene()
 // on "init" you need to initialize your instance
 bool FieldScene::init()
 {
-    //////////////////////////////
-    // 1. super init first
+    // 1. super init
     if ( !Scene::init() )
     {
         return false;
     }
 
+    // 2. init tilemap
     _tileMap = new TMXTiledMap();
     _tileMap->initWithTMXFile("res/map.tmx");
     _background = _tileMap->getLayer("background");
     _objects = _tileMap->getLayer("objects");
-
-    
     this->addChild(_tileMap, -1);
 
+
+    // 3. create sprites
     for (int i = 0; i < 30; i++){
         Vec2 pos(i*SPRITE_SIZE, RandomHelper::random_int(1, 19) * SPRITE_SIZE);
         //_rocks->setTileGID(56, tile);
@@ -45,6 +45,9 @@ void FieldScene::startSorting()
             bubbleSort();
             break;
         case eaCombSort:
+            combSort();
+            break;
+        case eaShakerSort:
             combSort();
             break;
         default:
@@ -124,4 +127,31 @@ void FieldScene::combSort()
         }
         step /= factor;
     }
+}
+
+void FieldScene::shakerSort()
+{
+    int control = FIELD_WIDTH;
+    int left  = 0;
+    int right = FIELD_WIDTH;
+    do {
+        for (int i = left; i < right; i++) {
+            if (_sprites[i]->getTag() > _sprites[i+1]->getTag()) {
+                setNewCoords(_sprites[i], i+1, _sprites[i]->getTag());
+                setNewCoords(_sprites[i+1], i, _sprites[i+1]->getTag());
+                std::swap(_sprites[i], _sprites[i+1]);
+                control = i;
+            }
+        }
+        right = control;
+        for (int i = right; i > left; i--) {
+            if (_sprites[i]->getTag() > _sprites[i-1]->getTag()) {
+                setNewCoords(_sprites[i], i-1, _sprites[i]->getTag());
+                setNewCoords(_sprites[i-1], i, _sprites[i-1]->getTag());
+                std::swap(_sprites[i], _sprites[i-1]);
+                control = i;
+            }
+        }
+        left = control;
+    } while (left < right);
 }

@@ -15,7 +15,8 @@ class FieldScene : public Scene
 public:
     enum eAlgo {
         eaBubbleSort,
-        eaCombSort
+        eaCombSort,
+        eaShakerSort
     };
 
     static Scene* createScene();
@@ -32,6 +33,7 @@ public:
 
     void bubbleSort();
     void combSort();
+    void shakerSort();
 
 
 
