@@ -130,7 +130,7 @@ void FieldScene::shakerSort()
 {
     int control = FIELD_WIDTH;
     int left  = 0;
-    int right = FIELD_WIDTH;
+    int right = FIELD_WIDTH-1;
     do {
         for (int i = left; i < right; i++) {
             if (_sprites[i]->getTag() > _sprites[i+1]->getTag()) {
@@ -142,7 +142,7 @@ void FieldScene::shakerSort()
         }
         right = control;
         for (int i = right; i > left; i--) {
-            if (_sprites[i]->getTag() > _sprites[i-1]->getTag()) {
+            if (_sprites[i]->getTag() < _sprites[i-1]->getTag()) {
                 setNewCoords(_sprites[i], i-1, _sprites[i]->getTag());
                 setNewCoords(_sprites[i-1], i, _sprites[i-1]->getTag());
                 std::swap(_sprites[i], _sprites[i-1]);
