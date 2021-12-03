@@ -30,10 +30,13 @@ bool MenuScene::init()
     auto item4 = MenuItemFont::create("Radix Sort", [&](Ref* sender){
         displayFieldScene(FieldScene::eaRadixSort);
     });
+    auto item5 = MenuItemFont::create("Counting Sort", [&](Ref* sender){
+        displayFieldScene(FieldScene::eaRadixSort);
+    });
 
     //////////////////////////////
     // 3. create menu
-    auto menu = Menu::create(item1, item2, item3, item4, nullptr);
+    auto menu = Menu::create(item1, item2, item3, item4, item5, nullptr);
     menu->alignItemsVertically();
     this->addChild(menu, 1);
 

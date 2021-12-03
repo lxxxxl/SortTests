@@ -40,6 +40,7 @@ bool FieldScene::init()
     _algos.push_back(&FieldScene::combSort);
     _algos.push_back(&FieldScene::shakerSort);
     _algos.push_back(&FieldScene::radixSort);
+    _algos.push_back(&FieldScene::countingSort);
 
     return true;
 }
@@ -187,5 +188,31 @@ void FieldScene::radixSort()
             }
         }
         divider *= 10;
+    }
+}
+
+void FieldScene::countingSort()
+{
+    int max = FIELD_HEIGHT;
+    Sprite *bucket[max][max];
+    memset(bucket, 0, sizeof(bucket));
+
+    for (int i = 0; i < max; i++){
+        int value = _sprites[i]->getTag();
+        int j = 0;
+        while (bucket[value][j] != nullptr)
+            j++;
+        bucket[value][j] = _sprites[i];
+    }
+
+    int pos = 0;
+    for (int i = 0; i < max; i++){
+        int j = 0;
+        while (bucket[i][j] != nullptr){
+            _sprites[pos] = bucket[i][j];
+            setNewCoords(_sprites[pos], pos, _sprites[pos]->getTag());
+            pos++;
+            j++;
+        }
     }
 }

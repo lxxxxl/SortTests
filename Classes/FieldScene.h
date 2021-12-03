@@ -17,7 +17,8 @@ public:
         eaBubbleSort,
         eaCombSort,
         eaShakerSort,
-        eaRadixSort
+        eaRadixSort,
+        eaCountingSort
     };
 
     static Scene* createScene();
@@ -36,6 +37,7 @@ public:
     void combSort();
     void shakerSort();
     void radixSort();
+    void countingSort();
 
 
     CC_PROPERTY(int, algo, Algo);
